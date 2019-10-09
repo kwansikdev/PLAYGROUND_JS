@@ -19,7 +19,7 @@ module.exports = {
     "no-console": "off",
     "quotes": [ "error", "single" ],
     "no-underscore-dangle": "warn",
-    "no-plusplus": [ "error", { "allowForLoopAfterthoughts": true }],
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "comma-dangle": [ "error", "never"],
     "no-console": "off"
   }
