@@ -9,9 +9,11 @@ const todos = [
 function render() {
   let html = '';
 
-  todos.forEach((todo => {
-    html += `<li id="${todo.id}">\n <label><input type="checkbox" ${todo.completed ? 'checked' : ''}>${todo.content}</label>\n</li>\n`;
-  }));
+  todos.forEach(todo => {
+    html += `<li id="${todo.id}">
+      <label><input type="checkbox" ${todo.completed ? 'checked' : ''}>${todo.content}</label>
+    </li>`;
+  });
 
   return html;
 }
