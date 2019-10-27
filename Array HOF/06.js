@@ -6,12 +6,10 @@ let todos = [
   { id: 1, content: 'Javascript', completed: false }
 ];
 
-console.log(todos[1].completed);
-
-
 function toggleCompletedById(id) {
   const boolrev = todos.filter(todo => todo.id === id);
   boolrev[0].completed = !boolrev[0].completed;
+
 
   // todos = todos.map(todo => todo.id === id ? Object.assign(todo, {completed: !todo.completed}) : todo)
   // todos = todos.map(todo => todo.id === id ? { ...todo, completed: !todo.completed} : todo)
