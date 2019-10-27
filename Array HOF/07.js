@@ -8,7 +8,6 @@ let todos = [
 
 function toggleCompletedAll() {
   // todos = todos.map(todo => Object.assign(todo, {completed: true}));
-
   todos = todos.map(todo => ({...todo, completed: true}));
 }
 
