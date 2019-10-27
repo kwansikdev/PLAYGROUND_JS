@@ -7,7 +7,7 @@ let todos = [
 ];
 
 function getMaxId() {
-  return Math.max(...todos.map(todo => todo.id));
+  return Math.max(...(todos.map(todo => todo.id)));
 }
 
 console.log(getMaxId()); // 3

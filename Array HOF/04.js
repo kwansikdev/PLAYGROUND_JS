@@ -7,7 +7,7 @@ let todos = [
 ];
 
 function addTodo(newTodo) {
-  // todos = [newTodo].concat(todos);
+  // return todos = [newTodo].concat(todos);
   todos = [newTodo, ...todos];
 }
 
