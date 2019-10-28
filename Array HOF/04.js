@@ -7,8 +7,8 @@ let todos = [
 ];
 
 function addTodo(newTodo) {
-  // return todos = [newTodo].concat(todos);
-  todos = [newTodo, ...todos];
+  todos = [newTodo].concat(todos);
+  // todos = [newTodo, ...todos];
 }
 
 addTodo({ id: 4, content: 'Test', completed: false });
