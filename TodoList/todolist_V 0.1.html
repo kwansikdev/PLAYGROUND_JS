@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .checked:checked + .content {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" placeholder="Enter todo!">
+  <button class="addbutton">추가</button>
+  <ul class="todos"></ul>
+
+  <script>
+    // 상태관리가 되지 않는다.
+    const $input = document.querySelector('input[type]');
+    const $todos = document.querySelector('.todos');
+    const $addbutton = document.querySelector('.addbutton');
+
+    $addbutton.onclick = e => {
+      if($input.value.trim() === '') return;
+
+      $todos.innerHTML += `<li><label><input type="checkbox" class="checked"><span class="content"> ${$input.value} </span></label><button>X</button></li>`;
+      $input.value = '';
+    };
+
+    $input.onkeyup = e => {
+      if(e.keyCode !== 13 || $input.value.trim() === '') return;
+
+      $todos.innerHTML += `<li><label><input type="checkbox" class="checked"><span class="content"> ${$input.value} </span></label><button class="remove">X</button></li>`;
+      $input.value = '';
+    };
+
+    $todos.addEventListener('click', e => {
+      if(!e.target.classList.contains('remove')) return;
+
+      $todos.removeChild(e.target.parentNode);
+    })
+  </script>
+</body>
+</html>
+
+<!-- let todos = [];
+const getTodos = function () {
+  // TODO: 서버로부터 todos 데이터를 취득
+  // Ajax
+  // 서버에서 가져왔다고 치고
+
+} -->

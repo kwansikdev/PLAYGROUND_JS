@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .checked:checked + .done-todo {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" placeholder="Enter todo!">
+  <ul class="todos"></ul>
+
+  <script>
+    let todos = [];
+    const $todos = document.querySelector('.todos');
+    const $input = document.querySelector('input');
+
+    const render = function() {
+      let html = '';
+
+      todos.forEach(todo => {
+        html += `
+          <li id="${todo.id}">
+            <label>
+              <input type="checkbox" class="checked" ${todo.completed ? 'checked' : ''}>
+              <span class="done-todo"> ${todo.content} </span>
+            </label>
+            <button class="remove">X</button>
+          </li>
+        `;
+      });
+      $todos.innerHTML = html;
+    };
+
+    const getTodos = function () {
+      todos = [
+        { id: 1, content: 'HTML', completed: false },
+        { id: 2, content: 'CSS', completed: true },
+        { id: 3, content: 'JavaScript', completed: false }
+      ];
+      render();
+    };
+
+    const addTodo = function(e) {
+      if(e.keyCode !== 13 || $input.value.trim() === '') return;
+
+      const intNum = !todos.length ? 1 : Math.max(...todos.map(todo => todo.id)) + 1;
+      todos = [...todos, {id: intNum, content: $input.value, completed: false}];
+      $input.value = '';
+
+      render();
+    };
+
+    const toggleCompleted = function({ target }) {
+      const id = target.parentNode.parentNode.id;
+      todos = todos.map(todo => todo.id === +id ? {...todo, completed: !todo.completed} : todo);
+      // todos = todos.map(todo => todo.id === +id ? Object.assign(todo, { completed: !todocompleted}) : todo);
+
+      render();
+    };
+
+    const removeTodo = function(e) {
+      if(!e.target.classList.contains('remove')) return;
+
+      const id = e.target.parentNode.id;
+      todos = todos.filter(todo => todo.id !== +id);
+
+      render();
+    }
+
+    // events
+    window.onload = getTodos;
+    $input.onkeyup = addTodo;
+    $todos.onchange = toggleCompleted;
+    $todos.onclick = removeTodo;
+  </script>
+</body>
+</html>
