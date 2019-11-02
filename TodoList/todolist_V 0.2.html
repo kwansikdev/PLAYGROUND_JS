@@ -48,7 +48,7 @@
       if(e.keyCode !== 13 || $input.value.trim() === '') return;
 
       const intNum = !todos.length ? 1 : Math.max(...todos.map(todo => todo.id)) + 1;
-      todos = [...todos, {id: intNum, content: $input.value, completed: false}];
+      todos = [...todos, {id: intNum, content: $input.value.trim(), completed: false}];
       $input.value = '';
 
       render();
