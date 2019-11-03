@@ -65,11 +65,11 @@
     const removeTodo = function(e) {
       if(!e.target.classList.contains('remove')) return;
 
-      const id = e.target.parentNode.id;
-      todos = todos.filter(todo => todo.id !== +id);
+      const id = +e.target.parentNode.id;
+      todos = todos.filter(todo => todo.id !== id);
 
       render();
-    }
+    };
 
     // events
     window.onload = getTodos;
