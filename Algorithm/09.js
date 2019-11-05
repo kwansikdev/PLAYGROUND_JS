@@ -3,10 +3,7 @@
 function nextSqaure(n){
   let x = Math.sqrt(n);
 
-  if(Number.isInteger(x)) {
-    return (x+1)**2;
-  }
-
+  if(Number.isInteger(x)) return (x+1)**2;
   return 'no';
 }
 
