@@ -2,8 +2,10 @@
   "name": "playground",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
-  "dependencies": {},
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
@@ -11,7 +13,7 @@
     "eslint-plugin-import": "^2.18.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server"
   },
   "keywords": [],
   "author": "",
