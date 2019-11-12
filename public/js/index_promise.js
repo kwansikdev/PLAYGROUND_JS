@@ -32,37 +32,45 @@ const render = (data) => {
 };
 
 const ajax = (() => {
-  const req = (method, url, f,  payload) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.setRequestHeader('content-type', 'application/json');
-    xhr.send(JSON.stringify(payload));
+  const req = (method, url, payload) => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.setRequestHeader('content-type', 'application/json');
+      xhr.send(JSON.stringify(payload));
 
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        f(JSON.parse(xhr.response));
-      } else {
-        throw new Error(xhr.status);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          resolve(JSON.parse(xhr.response));
+        } else {
+          reject(new Error(xhr.status));
+        }
       }
-    }
+    })
   };
 
   return {
-    get(url, f) {
-      req('GET', url, f)
+    get(url) {
+      return req('GET', url)
     },
-    post(url, f, payload) {
-      req('POST', url, f, payload)
+    get2(url) {
+      return req('GET', url)
     },
-    patch(url, f, payload) {
-      req('PATCH', url, f, payload)
+    post(url, payload) {
+      return req('POST', url, payload)
     },
-    put(url, f, payload) {
-      req('PUT', url, f, payload)
+    patch(url, payload) {
+      return req('PATCH', url, payload)
     },
-    del(url, f) {
-      req('DELETE', url, f)
+    put(url, payload) {
+      return req('PUT', url, payload)
+    },
+    del1(url) {
+      return req('DELETE', url)
+    },
+    del2(url) {
+      return req('DELETE', url)
     }
   };
 
@@ -74,33 +82,40 @@ const generateId = () => {
 
 //
 const getTodos = () => {
-  ajax.get('/todos', render);
+  ajax.get('/todos')
+    .then(render)
+    // .catch(console.error('Error'))
 };
 
 const addTodo = (content) => {
-  ajax.post('/todos', render, {id: generateId(), content, completed: false});
+  ajax.post('/todos', {id: generateId(), content, completed: false})
+    .then(render)
 }
 
 const toggleCheckbox = (id, completed) => {
-  ajax.patch(`/todos/${id}`, render, {completed});
+  ajax.patch(`/todos/${id}`, {completed})
+    .then(render)
 }
 
 const removeTodo = (id) => {
-  ajax.del(`/todos/${id}`, render);
+  ajax.del1(`/todos/${id}`)
+    .then(render)
 }
 
 const completeAll = (completed) => {
-  ajax.put(`/todos`, render, {completed});
+  ajax.put(`/todos`, {completed})
+    .then(render)
 }
 
 const clearCompletedAll = (completed) => {
-  ajax.del(`/todos/complete/${completed}`, render);
+  ajax.del2(`/todos/complete/${completed}`)
+    .then(render)
 }
 
 const toggleNav = () => {
-  ajax.get('/todos/toggle', render);
+  ajax.get2('/todos/toggle')
+    .then(render)
 }
-
 
 //  Event
 //
