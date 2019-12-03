@@ -16,7 +16,7 @@ function toWeirdCase(s) {
         result += sArr[i][j].toUpperCase();
       }
     }
-    result += ' ';
+    if (i < sArr.length - 1) result += ' ';
   }
   return result;
 }
